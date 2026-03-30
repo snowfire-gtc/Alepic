@@ -124,6 +124,6 @@ Everything must be released as soon as possible.
 
 # References
 
-https://ralph.alephium.org/
-https://rust-lang.org/
-https://www.typescriptlang.org/
+1. https://ralph.alephium.org/
+2. https://rust-lang.org/
+3. https://www.typescriptlang.org/
