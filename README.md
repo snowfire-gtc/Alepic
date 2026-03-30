@@ -131,8 +131,8 @@ alepic-client/
 
 ## UI
 
-* All area of Application is occupied by a 2D Image View which displays all visible chunks. Every chunk is stored as a texture which updates only after at least one of its pixels changes its color.
-* The Client Application implements mechanics to protect the User from failed Transactions.
+* All area of the Client Application is occupied by a 2D Image View which displays all visible chunks. Every chunk is stored as a texture which updates only after at least one of its pixels changes its color.
+* The Client Application implements mechanics to protect the User from potentially failing Transactions.
 
 ### General User interactions
 
