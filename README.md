@@ -151,7 +151,7 @@ Every View Layer adds additional custom interactions and UI elements to the basi
 * Button with a **Submit** label, located in the bottom right corner of the View.
 * **Choose Color** Interaction: left-click on palette.
 * **Draw** Interaction: left mouse click on owned chunk. Altered pixels are stored locally only.
-* **Submit** Interaction: User clicks the **Submit** button and Save Dialog window appears, where User can check fees and confirm the Transaction.
+* **Submit** Interaction: User clicks the **Submit** button and Submit Dialog window appears, where User can check Fees, Rules, User agrees to submit only appropriate content, and then the User can confirm the Transaction (Every transaction is displayed to the User in a TextBox).
 
 #### Market Layer:
 
@@ -159,9 +159,9 @@ Every View Layer adds additional custom interactions and UI elements to the basi
 * Auction Chunks have a special color.
 * Button with a **wallet icon**, located in the bottom right corner.
 * **Wallet Connect** Interaction: User clicks on the Wallet Button and Applications shows the Wallet Connect dialog.
-* **Sell** Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, checks for fees and approves the message to the smart contract.
-* **Buy** Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and fees and confirm transaction.
-* **Stake** Interaction: User clicks on one of Auction Chunks and dialog appears where the User can submit his Stake, check fees and read the Auction Rules.
+* **Sell** Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, check Fees, read the Rules, and then User can confirm the Transaction.
+* **Buy** Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and Fees, read the Rules, and then User can confirm the Transaction.
+* **Stake** Interaction: User clicks on a one of Auction Chunks and the dialog appears where the User can submit his Stake, check Fees and read the Auction Rules.
 
 # How to Build
 
