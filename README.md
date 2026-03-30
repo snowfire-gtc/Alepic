@@ -1,8 +1,8 @@
 # Alepic
 
-The Alephium Collaborative Canvas with the Alepe-the-Frog mascot.
+The Alephium Collaborative Canvas featuring the Alepe the Frog mascot.
 
-*This is the most recent version of the Design Document written without any use of an AI.
+*This is the latest version of the Design Document, written entirely without AI assistance.
 
 ## Constitution
 
@@ -18,15 +18,15 @@ Project's Values are:
 
 ## User Experience
 
-User interacts with Smart Contract through official and 3rd party Clients.
-Client Provider get Reward from every Chunk Buy/Sell operation.
+Users interact with the Smart Contract through official and 3rd party Clients.
+The Client Provider gets a Reward from every Chunk Buy/Sell operation.
 
 1. Buy Pixel Chunks for ALPH.
 2. Draw on your Pixel Chunks.
 3. Sell Pixel Chunks for ALPH.
 4. Get Rewards from the Treasury (the "Alepe game").
 5. Display the Image on your Billboard.
-6. View the Image on a city streets.
+6. View the Image on city streets.
 7. (Rent Mechanics).
 8. (???)
 9. Alepe dominates the Universe.
@@ -37,7 +37,7 @@ Client Provider get Reward from every Chunk Buy/Sell operation.
 2. User can pay N ALPH to buy a Random Unowned Chunk, where N=1 ALPH initially, after every Random Unowned Chunk purchase N increases by one: N=N+1.
 3. User can take part in Auction to buy one or more of Unowned Chunks around the Alepe's position (Auction Chunks).
 4. Alepe occupies a field of 2x2 Chunks.
-5. User can change pixel colors on his own Chunks. After the User finished drawing, he pushes "Submit" button to save the pixels in blockchain history.
+5. Users can change pixel colors on their own Chunks. After the User finished drawing, he pushes "Submit" button to save the pixels in blockchain history.
 6. User can sell any of his own Chunks for ALPH.
 7. Chunk ownership is exclusive.
 8. Chunk size: 16x16 pixels.
@@ -56,7 +56,7 @@ Client Provider get Reward from every Chunk Buy/Sell operation.
 Alepe the Frog is the Mascot of the Alepic project.
 
 1. Randomly Jumps every 100,000 Alephium Blocks (about 27 hours 46 minutes).
-2. Randomly Jumps on a distance ranged from 48 to 96 pixels left/right, up/down.
+2. Randomly Jumps a distance ranging from 48 to 96 pixels left/right, up/down.
 3. Owner of Chunk where Alepe lands gets 1% Reward of the Treasury.
 4. Unowned Chunks around the place where the Alepe lands (Auction Chunks) could be bought via the Auction.
 
@@ -74,7 +74,7 @@ y = sign_y>0 ? (y+dy)%HEIGHT : (y+HEIGHT-dy)%HEIGHT
 ### The Auction
 
 1. Every User can make a Stake for every Unowned Chunk plot around the Alepe position (the Auction Chunk).
-2. 1,000 blocks before the next Alepe Jump, the Auction ends, and for every Auction Chunk, the User with the best Stake (Winner) pays his Stake according to the Fees table and owns the corresponding Unowned Chunk, all other Stakes go to the Treasury.
+2. 1,000 blocks before the next Alepe Jump, the Auction ends, and for every Auction Chunk, the User with the highest Stake (the Winner) pays their Stake according to the Fees table and owns the corresponding Unowned Chunk, all other Stakes go to the Treasury.
 3. Minimal Stake: 1 ALPH. Maximal Stake: Unlimited.
 4. If there are two or more equal Stakes, then the Winner is defined by a random choice (Smart Contract Rule).
 
@@ -131,14 +131,14 @@ alepic-client/
 
 ## UI
 
-* All area of the Client Application is occupied by a 2D Image View which displays all visible chunks. Every chunk is stored as a texture which updates only after at least one of its pixels changes its color.
+* The entire area of the Client Application is occupied by a 2D Image View which displays all visible Chunks. Every Chunk is stored as a texture which updates only after at least one of its pixels changes its color.
 * The Client Application implements mechanics to protect the User from potentially failing Transactions.
 
 ### General User interactions
 
 * Zoom: mouse wheel, or pageUp/pageDown.
 * Pan: left mouse button click&drag, or arrow keys.
-* Switch Layer: over the image, in the bottom left corner of the Image View, the button with layers icon is shown. When the User clicks this button, View switches to the next View Layer.
+* Switch Layer: over the image, a button with a layers icon is shown in the bottom left corner of the Image View. Clicking this button switches the View to the next Layer.
 
 ### View Layers
 
@@ -147,11 +147,11 @@ Every View Layer adds additional custom interactions and UI elements to the basi
 #### Color Layer
 
 * **Image**, cached from the Chunks obtained from the Alephium block history.
-* **Color Palette**: show palette to choose pixel color. The Palette is presented by a set of square colored tiles densely packed in two rows (first row: bright colors, second row: dark colors) located in the horizontal panel located in the middle of the bottom part of the View.
+* **Color Palette**: show palette to choose pixel color. The Palette is presented by a set of square colored tiles densely packed in two rows (first row: bright colors, second row: dark colors) displayed in a horizontal panel at the bottom center of the View.
 * Button with a **Submit** label, located in the bottom right corner of the View.
 * **Choose Color** Interaction: left-click on palette.
 * **Draw** Interaction: left mouse click on owned chunk. Altered pixels are stored locally only.
-* **Submit** Interaction: User clicks the **Submit** button and Submit Dialog window appears, where User can check Fees, Rules, User agrees to submit only appropriate content, and then the User can confirm the Transaction (Every transaction is displayed to the User in a TextBox).
+* **Submit** Interaction: User clicks the **Submit** button and Submit Dialog window appears, where User can check Fees, Rules, User agrees to submit only appropriate content, and confirms the Transaction. Every transaction is displayed to the user in a text box.
 
 #### Market Layer:
 
@@ -160,7 +160,7 @@ Every View Layer adds additional custom interactions and UI elements to the basi
 * Button with a **wallet icon**, located in the bottom right corner.
 * **Wallet Connect** Interaction: User clicks on the Wallet Button and Applications shows the Wallet Connect dialog.
 * **Sell** Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, check Fees, read the Rules, and then User can confirm the Transaction.
-* **Buy** Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and Fees, read the Rules, and then User can confirm the Transaction.
+* **Buy** Interaction: User clicks on the Chunk not owned by him. Application shows Buy Dialog Window where user can check Chunk price and Fees, read the Rules, and then User can confirm the Transaction.
 * **Stake** Interaction: User clicks on a one of Auction Chunks and the dialog appears where the User can submit his Stake, check Fees and read the Auction Rules.
 
 # How to Build
@@ -177,9 +177,9 @@ cargo build --release
 
 # Who is Alepe?
 
-1. Alepe is a frog, but it is not a typical one frog.
+1. Alepe is a frog, but not a typical one.
 2. She is a Princess, who owns the Treasury.
-3. She gives to the Users her mercy whe she lands on their Chunks.
+3. She bestows her mercy upon Users when she lands on their Chunks.
 
 # Technical Information
 
@@ -189,9 +189,9 @@ fragmented across consecutive blocks if a chunk update exceeds single-block capa
 3. Smart Contract Memory limitations.
 4. User Safety Considerations.
 
-# Inappropriate Content Management.
+# Inappropriate Content Management
 
-Client Providers take responsibility for inappropriate content demonstration. They can use neural networks to filter out all inappropriate content in a sensible jurisdictions.
+Client Providers take responsibility for moderating inappropriate content. They may use neural networks to filter such content in relevant jurisdictions.
 
 # Roadmap
 
