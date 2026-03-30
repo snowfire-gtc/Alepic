@@ -1,0 +1,15 @@
+alepic-client/
+├── Cargo.toml
+├── src/
+│   ├── main.rs            # Точка входа
+│   ├── app.rs             # Логика приложения (State, Layers)
+│   ├── canvas.rs          # Логика холста (Chunks, Grid, Reconstruction)
+│   ├── rendering.rs       # Wgpu/Texture management
+│   ├── blockchain.rs      # Взаимодействие с Alephium (Section 5.1)
+│   ├── ui/
+│   │   ├── layers.rs      # Переключение слоев (Color, Market)
+│   │   ├── widgets.rs     # Кнопки, Палитра, Диалоги
+│   │   └── inputs.rs      # Zoom, Pan handling
+│   └── utils.rs           # Утилиты (4-bit palette, coords)
+└── assets/
+    └── icons/             # Иконки слоев, кошелька, сохранения

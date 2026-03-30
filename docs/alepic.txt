@@ -1,0 +1,230 @@
+WHITEPAPER.
+
+Alepic – Alephium Collaborative Canvas 
+Version: 10.
+Date: 2026/03/26.
+Platform: Alephium Blockchain.
+Format: Public Digital Asset & Interactive Art Protocol.
+Author: Sergey Antonov.
+
+
+1. Executive Summary.
+
+The Alepic (Alephium Collaborative Canvas) is a decentralized, community-driven digital  art platform designed to create and manage a single, massive-scale public image hosted 
+on blockchain technology. Unlike static NFT projects or centralized social media feeds,  Alepic allows thousands of users to collectively own and edit sections of a unified 4K artwork in real-time.
+
+Key Features:
+ - Resolution: Fixed 4096×2160 pixels (UHD/4K) suitable for global billboard deployment. 
+ - Ownership Model: The image is divided into 34,560 unique chunks (16×16 pixels 
+each). Each chunk has a single owner who controls edits within their territory. 
+ - Dynamic Pricing: Initial unclaimed chunks follow a fair ramp-up pricing model starting at 1 ALPH, increasing by 1 ALPH for each subsequent purchase to prevent speculation and ensure equitable access. 
+ - On-Chain History: Every color change and ownership transfer is recorded immutably 
+on the Alephium blockchain. 
+ - Ecosystem Incentives: A robust partner program rewards third-party developers (web  sites/apps) for driving traffic to the platform via a revenue-sharing model from 
+transaction fees. 
+ - Engagement: Integrated "Alepe" game mechanic rewards active participants and 
+sustains the ecosystem's economy through a Treasury system.
+
+
+2. Problem Statement.
+
+2.1 The Static Art Limitation.
+
+Traditional digital art platforms (e.g., standard NFT marketplaces) suffer from rigidity. Once an asset is minted, its visual content rarely changes without creating a new token, leading to fragmented history and lost context for collaborative works.
+
+2.2 Centralized Censorship Risks.
+
+Most public displays rely on centralized servers. If the server goes offline or is censored, the artwork disappears. This poses risks for long-term projects like global billboard campaigns that require resilience and uptime.
+
+2.3 Lack of Community Ownership.
+
+Current platforms rarely allow true shared ownership of a single visual narrative. Users are passive viewers rather than active co-creators with verifiable rights to specific areas of the canvas.
+
+2.4 Short-Lived Creations.
+
+Alepic provides eternal storage for the social art experiment which will exponentially gain its historical value over decades.
+
+
+3. Solution: The Collaborative Canvas Protocol.
+
+Alepic transforms the digital artwork into a dynamic, living entity where ownership is 
+fragmented but unified under a single protocol on the Alephium blockchain.
+
+3.1 Image Specification
+
+To ensure high visual fidelity for billboard displays while maintaining blockchain 
+efficiency: 
+ - Fixed Resolution: 4096×2160 pixels (8,847,360 total pixels). 
+ - Color Depth: Optimized 4-bit Indexed Palette to balance quality and on-chain storage costs. 
+ - Global Consistency: The image is rendered identically for all users based on the consensus of ownership records.
+
+3.2 Chunk-Based Ownership Architecture.
+
+The canvas is logically divided into a grid of small territories called Chunks. 
+Parameters and their values:
+Chunk Size: 16×16 pixels, 256 pixels per chunk;
+Total Chunks: 34,560 Grid of 256×135 chunks;
+Ownership Rights: Singular, Each chunk has exactly one owner address at any time; 
+Edit Privilege: Exclusive, Only the owner can modify pixel colors within their 
+assigned chunk.
+
+3.3 Decentralized History & Reconstruction.
+ 
+To overcome blockchain storage limits, the image state is not stored as a single file but reconstructed from a history of transactional blocks. 
+ - Storage: Each block (max 32 KB on Alephium) stores updates for multiple chunks or their metadata hashes. 
+ - Reconstruction: Clients download the latest history and map chunk states to 
+reconstruct the image in real-time.
+
+
+4. The Mascot: Alepe Game Layer.
+
+To incentivize participation and maintain community engagement, a randomized game 
+mechanic featuring the official mascot "Alepe" is embedded in the contract: 
+ - Starting Position: Each new session begins with Alepe located at the central pixel of the canvas (x=2048; y=1080). 
+ - Trigger Interval: Every 100,000 blocks, Alepe jumps to a random location within the canvas boundaries. At ~1 block/second on Alephium, this corresponds to approximately 27 hours 46 minutes (roughly once every day and a half). 
+ - Wrap-Around Logic: If the jump exceeds canvas edges, it teleports to the opposite side using modulo arithmetic: 
+dx = random(0 … MAX_DISTANCE-MIN_DISTANCE) + MIN_DISTANCE 
+dy = random(0 … MAX_DISTANCE-MIN_DISTANCE) + MIN_DISTANCE 
+sign_x = random(0..1) 
+sign_y = random(0..1) 
+x = sign_x>0 ? (x+dx)%WIDTH : (x+WIDTH-dx)%WIDTH 
+y = sign_y>0 ? (y+dy)%HEIGHT : (y+HEIGHT-dy)%HEIGHT 
+ - Reward Condition: The owner of the chunk where Alepe lands receives a share of the 
+Treasury (1% of total balance). If Alepe lands on an unclaimed chunk, no reward is 
+issued and funds remain in the Treasury.
+  - Alepe's Chunk Zone: the nearest 2x2 Chunks around current Alepe's pisition
+
+
+5. Technical Architecture.
+
+5.1 Blockchain Backend: Alephium.
+
+The project utilizes the Alephium blockchain due to its high throughput 
+(~1 block/second) and smart contract capabilities. 
+ - Transaction Limit: 32 KB per block is strictly enforced. Updates are batched or 
+fragmented across consecutive blocks if a chunk update exceeds single-block capacity. 
+ - State Storage: The smart contract maintains: 
+    -- Price for the next unclaimed chunk; 
+    -- Chunk ID to Owner Address mapping; 
+    -- Alepe game state and rewards. 
+ - Transaction Fees & Referral Tracking: Every transaction includes an optional referrer address field. If provided, a portion of the fee is automatically routed to this address via internal transfer logic within the contract.
+
+5.2 Client Application (Rust)
+ 
+The Client Application is built using Rust and is targeted for Android, Desktop Linux and Web (via WebAssembly). The Application has following features:
+ - Dynamic Loading: Users only download chunks currently visible on their viewport to optimize bandwidth. 
+ - Visualization: A custom rendering engine displays the 4K canvas with a zoomable and pannable interface. 
+ - Animations: "Chunk Updated", "Alepe Jumped", "Chunk added to market", "Chunk price changed", "Chunk sold".
+  - Minimal usage of TypeScript/JavaScript.
+  - All area of Application is occupied by a 2D Image View which displays all visible chunks. Every chunk is stored as a texture which updates only after at least one of its pixels changes its color.
+  - General User interactions:
+   -- Zoom: mouse wheel, or pageUp/pageDown.
+   -- Pan: left mouse button click&drag, or arrow keys.
+  - Over the image, in the bottom left corner of the Image View, the button with layers icon is shown. When the User clicks this button, view switches to the next View Layer.
+  - Every View Layer adds additional custom interactions and UI elements to the basic Image View.
+  - Color Layer:
+    -- Image, cached from the Chunks obtained from the Alephium block history.
+    -- Color Palette: show palette to choose pixel color. Palette is presented by a set of square colored tiles densely packed in one horizontal panel located at the bottom part of the View.
+    -- Button with a Save icon, located in the bottom right corner of View.
+    -- Choose Color Interaction: left-click on palette.
+    -- Draw Interaction: left mouse click on owned chunk. Altered pixels are stored locally only.
+    -- Save Interaction: User clicks the Save button and Save Dialog window appears, where User can check fees and confirm the Transaction.
+  - Market Layer:
+    -- Price of every Chunk being sold, including the Unclaimed Chunks and the Chunks in the Alepe's Chunk Zone.
+    -- Button with a wallet icon, located in the bottom right corner.
+    -- Wallet Connect Interaction: User clicks on the Wallet Button and Applications shows the Wallet Connect dialog.
+    -- Sell Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, checks for fees and approves the message to the smart contract.
+   -- Buy Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and fees and confirm transaction.
+  - Application implements mechanics to protect User from failed Transactions.
+
+6. Economic Model & Tokenomics.
+
+The purpose of the Alepic Economic Model is to provide the fair distribution of Chunks at the every stage of the Project evolution.
+
+6.1. Two ways of acquiring Chunks
+
+6.1.1. Acquiring random Chunk through the dynamic pricing mechanics
+
+This allows immediate buys of random Chunks, but every new Chunk bought this way will cost 1 ALPH more.
+
+Initial Price: 1 ALPH, first user to claim any unclaimed chunk pays this base price. 
+Increment per Claim: +1 ALPH Each subsequent unclaimed chunk purchase increases by exactly 1 ALPH. 
+Price Cap: 34,560 ALPH is theoretical maximum price for the last unclaimed chunk (fair distribution).
+
+6.1.2. Acquiring chunks by making the best stake for the one of the Alepe's Zone Chunks.
+
+When the Alepe jumps to the new position, it occupies The Alepe's Chunk Zone, where everyone can make a not refundable Stake on the every Unclaimed Chunk. 1000 blocks before the next jump Stakes will be frozen, no new Stakes will be accepted, every Unclaimed Chunk is transferred to the respective best Stake owner, all other Stakes go to the Treasury.
+If there are several Stakes of the same value, then the Best Stake is the first one.
+The current Best Stake is displayed on the Market Layer.
+Chunks from the Alepe's Chunk Zone can not be bought via immediate buy, smart contract has to draw a new random Chunk number until it will be outside of the Alepe's Chunk Zone.
+Minimal Stake: 1 ALPH.
+Maximal Stake: 1,000,000,000 ALPH.
+
+6.2 Treasury System & Fee Distribution.
+ 
+To ensure sustainability, community growth, and developer incentives, a tiered fee 
+distribution model is implemented: 
+Initial Sale: platform Treasury gets 95% of the Chunk price (obtained through the one of the described mechanics), Referrer gets 5% of chunk price;
+Secondary Transaction Fee: Seller gets 95% of the Chunk price, Treasury gets 4% of the Chunk price, Referrer gets 1% of the Chunk price.
+
+*Transaction Fee is paid by buyer.
+
+6.3 Alepe Reward Logic for Unclaimed Chunks.
+
+To prevent free-riding on unowned territory: 
+ - If Alepe lands on a chunk that has no registered owner, no reward is issued. 
+ - The funds intended for the reward remain in the Treasury to support future rewards for active claimants.
+ 
+6.4 Developer Ecosystem Incentives
+
+Alepic actively encourages the creation of third-party tools, web interfaces, and mobile clients that provide alternative access points to the network. 
+ - Referral Wallets: Developer can provide an optional referrer wallet address field in the transaction to get reward. 
+ - Passive Income: Users interacting with these tools automatically route the fee portion to the developer's wallet, creating a sustainable revenue stream for community builders.
+
+6.5 Additional Incentives & Governance
+
+ - Chunk owners are automatically motivated to show the Canvas on a big city street – that will exponentially raise the price of a Chunk. 
+ - No Governance.
+
+
+7. Security & Privacy.
+
+7.1 Data Integrity.
+
+ - Immutable History: All changes are cryptographically signed and stored in blocks. No central administrator can alter the history or "erase" edits. 
+ - Signature Verification: Every edit requires a valid digital signature from the chunk owner, preventing unauthorized modifications. 
+ - Fee Split Security: The referral fee logic is hardcoded into the consensus layer of the contract, ensuring that payments to partners cannot be manipulated by any single node operator.
+
+7.2 Privacy.
+
+ Privacy is provided by Alephium network.
+
+
+8. Scalability & Global Deployment.
+
+8.1 Billboard Integration
+
+The architecture is designed for offline digital signage: 
+ - QR Activation: Physical billboards use unique QR codes to connect local display units securely to the network node. 
+ - Low-Latency Sync: Billboards periodically sync with the blockchain to fetch the latest chunk states, ensuring the displayed image matches the consensus.
+
+8.2 Inappropriate Content Management.
+
+Clients take responsibility for inappropriate content demonstration. They can use neural networks to filter out inappropriate content in sensible jurisdictions.
+ 
+8.3 Future Upgrades.
+ 
+Only client code will be upgraded. 
+
+
+9. Roadmap.
+
+Step 1: Make Android application.
+Step 2: Add social elements to improve adoption.
+Step 3: Install billboards.
+
+
+10. Conclusion.
+
+The Alepic represents a paradigm shift in digital ownership and public art. By combining the permanence of blockchain with the dynamism of real-time collaboration, Alepic empowers communities to create art that is truly theirs—immutable yet evolving. With robust technical foundations on Alephium, a sustainable economic model rewarding both creators and developers, and a vision for global billboard integration featuring the mascot Alepe, Alepic is poised to become the standard for decentralized visual experiences. 
+Disclaimer: This document is for informational purposes only and does not constitute financial advice.
