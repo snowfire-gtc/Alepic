@@ -71,7 +71,7 @@ x = sign_x>0 ? (x+dx)%WIDTH : (x+WIDTH-dx)%WIDTH
 y = sign_y>0 ? (y+dy)%HEIGHT : (y+HEIGHT-dy)%HEIGHT
 ```
 
-### Auctions
+### The Auction
 
 1. Every User can make a Stake for every Unowned Chunk plot around the Alepe position (the Auction Chunk).
 2. 1,000 blocks before the next Alepe Jump, the Auction ends, and for every Auction Chunk, the User with the best Stake (Winner) pays his Stake according to the Fees table and owns the corresponding Unowned Chunk, all other Stakes go to the Treasury.
@@ -101,10 +101,11 @@ Treasury
 ## Storage
 
 1. Chunk ownership is stored in the Smart Contract Memory.
-2. Chunk data is stored in the Alephium Blockchain History.
-3. The Alepe Game State is stored in the Smart Contract Memory.
-4. Next Random Unowned Chunk price is stored in the Smart Contract Memory.
-5. User Wallet connection is stored in a secure way in a local key-ring.
+2. Chunk color data is stored in the Alephium Blockchain History.
+3. Chunk price is stored in the Smart Contract Memory.
+4. The Alepe Game State is stored in the Smart Contract Memory.
+5. Next Random Unowned Chunk price is stored in the Smart Contract Memory.
+6. User Wallet connection is stored in a secure way in a local key-ring.
 
 ## File Structure
 
@@ -145,20 +146,22 @@ Every View Layer adds additional custom interactions and UI elements to the basi
 
 #### Color Layer
 
-* Image, cached from the Chunks obtained from the Alephium block history.
-* Color Palette: show palette to choose pixel color. Palette is presented by a set of square colored tiles densely packed in one horizontal panel located at the bottom part of the View.
-* Button with a Save icon, located in the bottom right corner of View.
-* Choose Color Interaction: left-click on palette.
-* Draw Interaction: left mouse click on owned chunk. Altered pixels are stored locally only.
-* Save Interaction: User clicks the Save button and Save Dialog window appears, where User can check fees and confirm the Transaction.
+* **Image**, cached from the Chunks obtained from the Alephium block history.
+* **Color Palette**: show palette to choose pixel color. The Palette is presented by a set of square colored tiles densely packed in two rows (first row: bright colors, second row: dark colors) located in the horizontal panel located in the middle of the bottom part of the View.
+* Button with a **Submit** label, located in the bottom right corner of the View.
+* **Choose Color** Interaction: left-click on palette.
+* **Draw** Interaction: left mouse click on owned chunk. Altered pixels are stored locally only.
+* **Submit** Interaction: User clicks the **Submit** button and Save Dialog window appears, where User can check fees and confirm the Transaction.
 
 #### Market Layer:
 
-* Price of every Chunk being sold, including the Unclaimed Chunks and the Chunks in the Alepe's Chunk Zone.
-* Button with a wallet icon, located in the bottom right corner.
-* Wallet Connect Interaction: User clicks on the Wallet Button and Applications shows the Wallet Connect dialog.
-* Sell Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, checks for fees and approves the message to the smart contract.
-* Buy Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and fees and confirm transaction.
+* Above every Unowned Chunk (excluding Auction Chunks) and every Chunk being sold - a text label is shown indicating the corresponding Chunk's price.
+* Auction Chunks have a special color.
+* Button with a **wallet icon**, located in the bottom right corner.
+* **Wallet Connect** Interaction: User clicks on the Wallet Button and Applications shows the Wallet Connect dialog.
+* **Sell** Interaction: User clicks on the one of his Chunks with the left mouse button and Application shows the Sell Dialog where the User can set the Chunk Sell Price, checks for fees and approves the message to the smart contract.
+* **Buy** Interaction: User clicks on the Chunk not owned by him. Application show Buy Dialog Window where user can check Chunk price and fees and confirm transaction.
+* **Stake** Interaction: User clicks on one of Auction Chunks and dialog appears where the User can submit his Stake, check fees and read the Auction Rules.
 
 # How to Build
 
@@ -184,6 +187,7 @@ cargo build --release
 fragmented across consecutive blocks if a chunk update exceeds single-block capacity.
 2. Smart Contract Execution cost.
 3. Smart Contract Memory limitations.
+4. User Safety Considerations.
 
 # Inappropriate Content Management.
 
