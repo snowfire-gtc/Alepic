@@ -37,7 +37,7 @@ Client Provider get Reward from every Chunk Buy/Sell operation.
 | Unowned Chunk Sold | 5% | 95% | 0% |
 | Owned Chunk Sold | 1% | 4% | 95% |
 
-### Alepe Game
+### The Alepe Game
 
 Alepe the Frog is the Mascot of the Alepic project.
 
@@ -55,6 +55,7 @@ Alepe the Frog is the Mascot of the Alepic project.
 
 ## Architecture
 
+``` Diagram
 Rust or TypeScript Client
 ^
 |
@@ -68,6 +69,7 @@ Alephium Smart Contract <-> Alephium User Wallet
 |
 v
 Treasury
+```
 
 ## Storage
 
@@ -78,6 +80,7 @@ Treasury
 
 ## File Structure
 
+``` Diagram
 alepic-client/
 ├── Cargo.toml
 ├── src/
@@ -95,6 +98,7 @@ alepic-client/
 	├── icons/				# Icons: layers, connect wallet, save changed pixels.
 	├── sounds/				# Sounds: Alepe jumps, Chunk changes, etc...
 	└── fonts/				# Fonts.
+```
 
 # How to Build
 
