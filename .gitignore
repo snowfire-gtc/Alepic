@@ -1,26 +1,53 @@
 ```
 # Dependencies
-target/
-.cargo/
+node_modules/
 
-# Logs and temp files
-*.log
-*.tmp
+# Build artifacts
+dist/
+build/
+coverage/
+.nyc_output/
 
-# Environment
+# Environment variables
 .env
 .env.local
-*.env.*
+.env.*
 
-# Editors
+# IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# Coverage
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package lock
+package-lock.json
+
+# Test coverage
 coverage/
-htmlcov/
-.coverage
+.htmlcov/
+*.coverage
 
-# Rust-specific
-**/*.rs.bk
+# Browserslist
+.browserslist*
+
+# Jest
+.jest*
+
+# TypeScript
+*.tsbuildinfo
+
+# Alephium specific
+alephium.config.ts
+contracts/*.ral
 ```

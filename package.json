@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@alephium/cli": "^2.0.11"
+  }
+}
